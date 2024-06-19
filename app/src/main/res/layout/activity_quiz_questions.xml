@@ -17,7 +17,6 @@
             android:id="@+id/ques_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Question no = 0"
             android:layout_margin="10sp"
             android:textColor="@color/gray"
             android:textSize="20sp"
@@ -32,7 +31,6 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginBottom="20sp"
-            android:text="Which Country does this flag belongs?"
             />
         <ImageView
             android:id="@+id/flag_image"

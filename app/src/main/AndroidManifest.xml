@@ -13,10 +13,14 @@
         android:theme="@style/Theme.Quizes"
         tools:targetApi="31">
         <activity
-            android:name=".QuizQuestions"
-            android:screenOrientation="portrait"
+            android:name=".ResultActivity"
             android:theme="@style/appTheme"
             android:exported="false" />
+        <activity
+            android:name=".QuizQuestions"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/appTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

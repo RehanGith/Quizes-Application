@@ -1,5 +1,6 @@
 package com.example.quizes
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.media.Image
@@ -21,6 +22,7 @@ class QuizQuestions : AppCompatActivity(), View.OnClickListener {
     private var currentPosition:Int = 1
     private var questionslist: ArrayList<Question>? = null
     private var selectedPosition: Int = 0
+    private var count: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,16 +38,17 @@ class QuizQuestions : AppCompatActivity(), View.OnClickListener {
 
 
     }
+    @SuppressLint("SetTextI18n")
     private fun setquestion() {
-        val ques = questionslist!![currentPosition - 1]
         defaultQuestionsView()
         if(currentPosition == questionslist!!.size) {
             findViewById<Button>(R.id.submit).text = "FINISH"
         } else {
             findViewById<Button>(R.id.submit).text = "SUBMIT"
         }
+        val ques = questionslist!![currentPosition - 1]
         findViewById<TextView>(R.id.ques_id).text = "Question: ${currentPosition}"
-        findViewById<TextView>(R.id.ques_text).text = ques!!.ques
+        findViewById<TextView>(R.id.ques_text).text = ques.ques
         findViewById<ProgressBar>(R.id.progress_bar).progress = currentPosition
         findViewById<TextView>(R.id.progress).text =
             "$currentPosition" + "/" + "10"
@@ -89,13 +92,15 @@ class QuizQuestions : AppCompatActivity(), View.OnClickListener {
                     if(currentPosition <= questionslist!!.size){
                         setquestion()
                     }else {
-                        Toast.makeText(this, "You have successfully completed the Quiz", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Your correct answers are ${count}", Toast.LENGTH_SHORT ).show()
                     }
                 }
                 else {
                     val ques = questionslist?.get(currentPosition - 1)
                     if(ques!!.correct_option != selectedPosition) {
                         answerView(selectedPosition, R.drawable.wrong_optoin_bar)
+                    } else {
+                        count++
                     }
                     answerView(ques.correct_option, R.drawable.correct_optoin_bar)
                     if(currentPosition == questionslist!!.size) {
