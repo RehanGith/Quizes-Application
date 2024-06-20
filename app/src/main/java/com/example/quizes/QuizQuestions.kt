@@ -1,6 +1,7 @@
 package com.example.quizes
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.media.Image
@@ -23,10 +24,12 @@ class QuizQuestions : AppCompatActivity(), View.OnClickListener {
     private var questionslist: ArrayList<Question>? = null
     private var selectedPosition: Int = 0
     private var count: Int = 0
+    private var mUserName: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_quiz_questions)
+        mUserName = intent.getStringExtra(Constansts.NAME)
         questionslist = Constansts.getQuestions()
 
         setquestion()
@@ -93,6 +96,12 @@ class QuizQuestions : AppCompatActivity(), View.OnClickListener {
                         setquestion()
                     }else {
                         Toast.makeText(this, "Your correct answers are ${count}", Toast.LENGTH_SHORT ).show()
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra(Constansts.NAME, mUserName)
+                        intent.putExtra(Constansts.TOTAL_ANS, questionslist!!.size)
+                        intent.putExtra(Constansts.CORRECT_QUE, count)
+                        startActivity(intent)
+                        finish()
                     }
                 }
                 else {

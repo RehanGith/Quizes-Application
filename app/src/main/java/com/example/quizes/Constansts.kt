@@ -1,6 +1,9 @@
 package com.example.quizes
 
 object Constansts {
+    const val CORRECT_QUE:String = "Correct question"
+    const val TOTAL_ANS:String = "total answers"
+    const val  NAME:String = "name"
     fun getQuestions(): ArrayList<Question> {
         val questionsList = ArrayList<Question> ()
         val que1 = Question(
